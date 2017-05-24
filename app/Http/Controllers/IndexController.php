@@ -9,8 +9,14 @@ class IndexController extends Controller{
 
     public function getIndex(){
 
-        $world = World::with('stories', 'characters')->find(1);
+        $world = World::with(
+            'stories',
+            'characters',
+            'characters.attributes',
+            'characters.attributes.attribute'
+        )->find(1);
 
+        echo '<pre>';
         print_r($world->toArray());
         return $world;
     }

@@ -47,6 +47,45 @@ INSERT INTO `attributes` VALUES (1,'LIFE','SELF','Hit Points','Hit Points',100,'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `character_attributes`
+--
+
+DROP TABLE IF EXISTS `character_attributes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `character_attributes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `world_id` int(11) unsigned NOT NULL,
+  `character_id` int(11) unsigned NOT NULL,
+  `attribute_id` int(11) unsigned NOT NULL,
+  `target_id` int(11) unsigned DEFAULT NULL,
+  `value_current` int(11) DEFAULT NULL,
+  `value_base` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `character_id_attribute_id_target_id` (`character_id`,`attribute_id`,`target_id`),
+  KEY `world_id` (`world_id`),
+  KEY `FK_character_attributes_attributes` (`attribute_id`),
+  KEY `FK_character_attributes_characters_2` (`target_id`),
+  CONSTRAINT `FK_character_attributes_attributes` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`),
+  CONSTRAINT `FK_character_attributes_characters` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`),
+  CONSTRAINT `FK_character_attributes_characters_2` FOREIGN KEY (`target_id`) REFERENCES `characters` (`id`),
+  CONSTRAINT `FK_character_attributes_worlds` FOREIGN KEY (`world_id`) REFERENCES `worlds` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `character_attributes`
+--
+
+LOCK TABLES `character_attributes` WRITE;
+/*!40000 ALTER TABLE `character_attributes` DISABLE KEYS */;
+INSERT INTO `character_attributes` VALUES (1,1,1,1,NULL,100,100,'2017-05-24 08:05:03','2017-05-24 08:05:21'),(2,1,2,1,NULL,100,100,'2017-05-24 08:05:15','2017-05-24 08:05:22'),(3,1,3,1,NULL,100,100,'2017-05-24 08:05:17','2017-05-24 08:05:23'),(4,1,2,2,1,25,50,'2017-05-24 08:05:19','2017-05-24 08:05:24'),(5,1,3,2,1,50,50,'2017-05-24 08:05:20','2017-05-24 08:05:25');
+/*!40000 ALTER TABLE `character_attributes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `characters`
 --
 
@@ -55,7 +94,7 @@ DROP TABLE IF EXISTS `characters`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `characters` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `world_id` int(11) DEFAULT NULL,
+  `world_id` int(11) unsigned DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -92,7 +131,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES ('2017_05_23_183034_create_characters_table',1),('2017_05_23_183040_create_stories_table',1),('2017_05_23_184633_create_worlds_table',2),('2014_10_12_000000_create_users_table',3),('2014_10_12_100000_create_password_resets_table',3),('2017_05_24_073613_create_attributes_table',3);
+INSERT INTO `migrations` VALUES ('2017_05_23_183034_create_characters_table',1),('2017_05_23_183040_create_stories_table',1),('2017_05_23_184633_create_worlds_table',2),('2014_10_12_000000_create_users_table',3),('2014_10_12_100000_create_password_resets_table',3),('2017_05_24_073613_create_attributes_table',3),('2017_05_24_075646_create_character_attributes_table',4);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +144,7 @@ DROP TABLE IF EXISTS `stories`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `stories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `world_id` int(11) DEFAULT NULL,
+  `world_id` int(11) unsigned DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -158,4 +197,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-24  9:43:55
+-- Dump completed on 2017-05-24 10:18:39
