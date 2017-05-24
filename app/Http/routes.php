@@ -15,4 +15,5 @@
 //    return view('welcome');
 //});
 
+Route::controller('/api', 'ApiController');
 Route::controller('/', 'IndexController');

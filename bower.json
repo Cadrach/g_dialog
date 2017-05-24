@@ -1,0 +1,21 @@
+{
+  "name": "g_dialog",
+  "description": "",
+  "main": "",
+  "authors": [],
+  "license": "MIT",
+  "homepage": "https://github.com/Cadrach/g_dialog",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4"
+  }
+}

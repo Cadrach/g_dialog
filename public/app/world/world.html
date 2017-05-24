@@ -1,0 +1,12 @@
+<table>
+    <tbody ng-repeat="c in characters">
+        <tr><td>{{c.name}}</td></tr>
+        <tr ng-repeat="a in c.attributes">
+            <td>{{a.attribute.code}}</td>
+            <td>{{a.value_current}}/{{a.value_base}}</td>
+        </tr>
+    <tr><td>-----------</td></tr>
+    </tbody>
+</table>
+
+<pre>{{characters|json}}</pre>

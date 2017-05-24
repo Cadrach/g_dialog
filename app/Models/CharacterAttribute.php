@@ -8,7 +8,7 @@ class CharacterAttribute extends Model
 {
     public function attribute()
     {
-        return $this->hasOne('App\Models\Attribute', 'id');
+        return $this->hasOne('App\Models\Attribute', 'id', 'attribute_id');
     }
 
     public function target()
