@@ -16,6 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `attributes`
+--
+
+DROP TABLE IF EXISTS `attributes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `attributes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` set('TARGETED','SELF') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name_positive` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name_negative` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `value_default` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `CODE` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attributes`
+--
+
+LOCK TABLES `attributes` WRITE;
+/*!40000 ALTER TABLE `attributes` DISABLE KEYS */;
+INSERT INTO `attributes` VALUES (1,'LIFE','SELF','Hit Points','Hit Points',100,'2017-05-24 07:40:33','2017-05-24 07:40:33'),(2,'LOYALTY','TARGETED','Loyalty','Defiance',0,'2017-05-24 07:40:33','2017-05-24 07:40:33'),(3,'LOVE','TARGETED','Love','Hate',0,'2017-05-24 07:40:33','2017-05-24 07:40:33');
+/*!40000 ALTER TABLE `attributes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `characters`
 --
 
@@ -61,7 +92,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES ('2017_05_23_183034_create_characters_table',1),('2017_05_23_183040_create_stories_table',1),('2017_05_23_184633_create_worlds_table',2);
+INSERT INTO `migrations` VALUES ('2017_05_23_183034_create_characters_table',1),('2017_05_23_183040_create_stories_table',1),('2017_05_23_184633_create_worlds_table',2),('2014_10_12_000000_create_users_table',3),('2014_10_12_100000_create_password_resets_table',3),('2017_05_24_073613_create_attributes_table',3);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-23 21:09:18
+-- Dump completed on 2017-05-24  9:43:55
