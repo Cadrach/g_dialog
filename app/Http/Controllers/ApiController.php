@@ -10,6 +10,7 @@ class ApiController extends Controller{
     public function getWorld($id = 1){
         $world = World::with(
             'stories',
+            'stories.objectives',
             'characters',
             'characters.attributes',
             'characters.attributes.attribute'

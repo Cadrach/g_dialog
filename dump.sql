@@ -131,8 +131,48 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES ('2017_05_23_183034_create_characters_table',1),('2017_05_23_183040_create_stories_table',1),('2017_05_23_184633_create_worlds_table',2),('2014_10_12_000000_create_users_table',3),('2014_10_12_100000_create_password_resets_table',3),('2017_05_24_073613_create_attributes_table',3),('2017_05_24_075646_create_character_attributes_table',4);
+INSERT INTO `migrations` VALUES ('2017_05_23_183034_create_characters_table',1),('2017_05_23_183040_create_stories_table',1),('2017_05_23_184633_create_worlds_table',2),('2014_10_12_000000_create_users_table',3),('2014_10_12_100000_create_password_resets_table',3),('2017_05_24_073613_create_attributes_table',3),('2017_05_24_075646_create_character_attributes_table',4),('2017_05_24_124532_create_objectives_table',5);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `objectives`
+--
+
+DROP TABLE IF EXISTS `objectives`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `objectives` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `world_id` int(10) unsigned DEFAULT NULL,
+  `story_id` int(10) unsigned DEFAULT NULL,
+  `character_id` int(10) unsigned DEFAULT NULL,
+  `attribute_id` int(10) unsigned DEFAULT NULL,
+  `value` int(10) unsigned DEFAULT NULL,
+  `type` set('BELOW_OR_EQUAL','OVER_OR_EQUAL','EQUAL') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `consequence` set('SUCCESS','FAILURE') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `world_id` (`world_id`),
+  KEY `story_id_character_id_attribute_id` (`story_id`,`character_id`,`attribute_id`),
+  KEY `FK_objectives_characters` (`character_id`),
+  KEY `FK_objectives_attributes` (`attribute_id`),
+  CONSTRAINT `FK_objectives_worlds` FOREIGN KEY (`world_id`) REFERENCES `worlds` (`id`),
+  CONSTRAINT `FK_objectives_stories` FOREIGN KEY (`story_id`) REFERENCES `stories` (`id`),
+  CONSTRAINT `FK_objectives_characters` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`),
+  CONSTRAINT `FK_objectives_attributes` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `objectives`
+--
+
+LOCK TABLES `objectives` WRITE;
+/*!40000 ALTER TABLE `objectives` DISABLE KEYS */;
+INSERT INTO `objectives` VALUES (1,1,1,1,1,0,'BELOW_OR_EQUAL','SUCCESS','2017-05-24 12:55:12','2017-05-24 12:55:13');
+/*!40000 ALTER TABLE `objectives` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -197,4 +237,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-24 12:14:21
+-- Dump completed on 2017-05-24 14:58:19
